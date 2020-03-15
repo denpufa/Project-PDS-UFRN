@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projetodps/button.dart';
+import 'package:projetodps/componentes/Button.dart';
 
 void main() => runApp(MyApp());
 
@@ -28,25 +28,26 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     
     return Scaffold(
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.redAccent,
+            appBar: AppBar(
+                 title: const Text('Sistema de marcações'),
+                 centerTitle: true,
+            ),
             body:Center(
               child:Padding(
-                padding: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 0.0),
+                padding: EdgeInsets.fromLTRB(0.0, 120.0, 0.0, 0.0),
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Text('Sistema de marcações',style: TextStyle(color:Colors.blueAccent),),
-                    Padding(padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0,0.0),
-                    child: Button('Cadastrar Usuário',1,context) 
-                    ),
-                    SizedBox(width:10),
+                    Button('Cadastrar Usuário',1,context),
+                    SizedBox(height:25),
                     Button('Buscar Usuário',2,context),
-                    SizedBox(width:10),
+                    SizedBox(height:25),
                     Button('Cadastrar Especialidade',3,context),
                   ]
                 )
               )
-            )
+            ),
+            floatingActionButton: FloatingActionButton(onPressed:null,child:Icon(Icons.help_outline)),
           );
   }
 }

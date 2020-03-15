@@ -1,44 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:projetodps/CadastroUsu.dart';
+import 'package:projetodps/telas/CadastroUsu.dart';
 class Button extends StatefulWidget {
-   @override
-    _Button createState() => _Button();
-
-  Button(String t,int i,BuildContext c){
-    _Button createState() => _Button.com(t,i,c);
-    }
-  }
- class _Button extends State<Button>{
-  String t;
-  int i;
-  BuildContext c;
-  _Button();
-  _Button.com(String t,int i,BuildContext c){
-    this.t = t;
-    this.i = i;
-    this.c = c;
-  }
+  final String t;
+  final int i;
+  final BuildContext c;
   
-  void cadastro(){
-    MaterialPageRoute(builder:(c) =>  CadastroUsu());
-  }
-  void busca(){}
-  void cadastroEsp(){}
+  @override
+  _Button createState() => _Button();
+  Button(this.t,this.i,this.c,{Key key}):super(key:key);
+  
+  String getT(){return t;}
+  int getI(){return i;}
+  BuildContext getC(){return c;}
+
+}
+ 
+ class _Button extends State<Button>{
   
   @override
   Widget build(BuildContext context) {
     return RaisedButton(
-         onPressed: (){
-          switch(i){
-           case 1:cadastro(); break;
-           case 2:busca(); break;
-           case 3:cadastroEsp(); break;
-           break;
-          }
-        },
+         onPressed: (){_tipo(widget.getI());}
+        ,
         textColor: Colors.white,
         padding: const EdgeInsets.all(0.0),
         child: Container(
+          height: 47,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: <Color>[
@@ -50,11 +37,25 @@ class Button extends StatefulWidget {
           ),
           padding: const EdgeInsets.all(10.0),
           child: Text(
-            "$t",
+          widget.getT(),
             style: TextStyle(fontSize: 20)
           ),
         ),
-        );
+      );
   }
-}
- 
+
+  void _cadastro(){MaterialPageRoute(builder:(context) =>  CadastroUsu());}
+  
+  void _busca(){}
+  
+  void _cadastroEsp(){}
+  
+  void _tipo(int i){
+      switch(i){
+                case 1: _cadastro(); break;
+                case 2:_busca(); break;
+                case 3:_cadastroEsp(); break;
+                break;
+        }
+    }
+ } 
