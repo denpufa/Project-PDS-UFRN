@@ -44,7 +44,7 @@ class Button extends StatefulWidget {
       );
   }
 
-  void _cadastro(){MaterialPageRoute(builder:(context) =>  CadastroUsu());}
+  void _cadastro(){Navigator.push(context,MaterialPageRoute(builder:(context) =>  CadastroUsu()));}
   
   void _busca(){}
   
