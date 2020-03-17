@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:projetodps/telas/CadastroUsu.dart';
+import 'package:projetodps/telas/CadastroP.dart';
 class Button extends StatefulWidget {
-  final String t;
-  final int i;
-  final BuildContext c;
+  final String _t;
+  final int _i;
+  
   
   @override
   _Button createState() => _Button();
-  Button(this.t,this.i,this.c,{Key key}):super(key:key);
+  Button(this._t,this._i,{Key key}):super(key:key);
   
-  String getT(){return t;}
-  int getI(){return i;}
-  BuildContext getC(){return c;}
+  String getT(){return _t;}
+  int getI(){return _i;}
+  
 
 }
  
@@ -20,8 +20,7 @@ class Button extends StatefulWidget {
   @override
   Widget build(BuildContext context) {
     return RaisedButton(
-         onPressed: (){_tipo(widget.getI());}
-        ,
+         onPressed: (){_tipo(widget.getI());},
         textColor: Colors.white,
         padding: const EdgeInsets.all(0.0),
         child: Container(
@@ -29,9 +28,9 @@ class Button extends StatefulWidget {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: <Color>[
-                Color(0xFF0D47A1),
-                Color(0xFF1976D2),
-                Color(0xFF42A5F5),
+                Color(0xFF90EE90),
+                Color(0xFF90EE95),
+                Color(0xFF90EE99),
               ],
             ),
           ),
@@ -43,18 +42,14 @@ class Button extends StatefulWidget {
         ),
       );
   }
-
-  void _cadastro(){Navigator.push(context,MaterialPageRoute(builder:(context) =>  CadastroUsu()));}
   
-  void _busca(){}
-  
-  void _cadastroEsp(){}
-  
-  void _tipo(int i){
-      switch(i){
-                case 1: _cadastro(); break;
-                case 2:_busca(); break;
-                case 3:_cadastroEsp(); break;
+  void _tipo(int i)
+  {
+      switch(i)
+      {
+                case 1:Navigator.push(context,MaterialPageRoute(builder:(context) =>  CadastroP()));  break;
+                case 2: break;
+                case 3: break;
                 break;
         }
     }

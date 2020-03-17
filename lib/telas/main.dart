@@ -28,26 +28,29 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     
     return Scaffold(
-            backgroundColor: Colors.redAccent,
+            backgroundColor: Colors.white,
             appBar: AppBar(
                  title: const Text('Sistema de marcações'),
                  centerTitle: true,
+                 backgroundColor: Colors.greenAccent,
             ),
-            body:Center(
-              child:Padding(
-                padding: EdgeInsets.fromLTRB(0.0, 120.0, 0.0, 0.0),
-                child: Column(
-                  children: <Widget>[
-                    Button('Cadastrar Usuário',1,context),
-                    SizedBox(height:25),
-                    Button('Buscar Usuário',2,context),
-                    SizedBox(height:25),
-                    Button('Cadastrar Especialidade',3,context),
-                  ]
-                )
-              )
+            body:SingleChildScrollView(
+              child: Center(
+                  child:Padding(
+                    padding: EdgeInsets.fromLTRB(0.0, 120.0, 0.0, 0.0),
+                    child: Column(
+                      children: <Widget>[
+                        Button('Cadastrar Paciente',1),
+                        SizedBox(height:25),
+                        Button('Buscar Paciente',2),
+                        SizedBox(height:25),
+                        Button('Cadastrar Especialidade',3),
+                      ]
+                    )
+                  )
+                ),
             ),
-            floatingActionButton: FloatingActionButton(onPressed:null,child:Icon(Icons.help_outline)),
+            floatingActionButton: FloatingActionButton(onPressed:null,child:Icon(Icons.help_outline),backgroundColor: Colors.greenAccent,),
           );
   }
 }
