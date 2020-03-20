@@ -20,26 +20,21 @@ class Button extends StatefulWidget {
   @override
   Widget build(BuildContext context) {
     return RaisedButton(
-         onPressed: (){_tipo(widget.getI());},
-        textColor: Colors.white,
-        padding: const EdgeInsets.all(0.0),
-        child: Container(
-          height: 47,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: <Color>[
-                Color(0xFF90EE90),
-                Color(0xFF90EE95),
-                Color(0xFF90EE99),
-              ],
+          onPressed: (){_tipo(widget.getI());},
+          textColor: Colors.black,
+          padding: const EdgeInsets.all(0.0),
+          child: Container(
+            alignment: Alignment.center,
+            width: 250,
+            height: 40,
+            color: Colors.greenAccent,
+            padding: const EdgeInsets.all(10.0),
+            child: Text(
+            widget.getT(),
+              style: TextStyle(fontSize: 18)
             ),
           ),
-          padding: const EdgeInsets.all(10.0),
-          child: Text(
-          widget.getT(),
-            style: TextStyle(fontSize: 20)
-          ),
-        ),
+      
       );
   }
   
@@ -47,10 +42,10 @@ class Button extends StatefulWidget {
   {
       switch(i)
       {
-                case 1:Navigator.push(context,MaterialPageRoute(builder:(context) =>  CadastroP()));  break;
-                case 2: break;
-                case 3: break;
-                break;
-        }
+        case 1:Navigator.push(context,MaterialPageRoute(builder:(context) =>  CadastroP()));  break;
+        case 2: break;
+        case 3: break;
+        break;
+      }
     }
  } 

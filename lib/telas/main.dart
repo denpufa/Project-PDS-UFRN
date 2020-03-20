@@ -30,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
             backgroundColor: Colors.white,
             appBar: AppBar(
-                 title: const Text('Sistema de marcações'),
+                 title: const Text('Sistema de marcações',style: TextStyle(color:Colors.black,fontSize: 25),),
                  centerTitle: true,
                  backgroundColor: Colors.greenAccent,
             ),
@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   )
                 ),
             ),
-            floatingActionButton: FloatingActionButton(onPressed:null,child:Icon(Icons.help_outline),backgroundColor: Colors.greenAccent,),
+            floatingActionButton: FloatingActionButton(onPressed:null,child:Icon(Icons.help_outline,color: Colors.black,),backgroundColor: Colors.greenAccent,),
           );
   }
 }
