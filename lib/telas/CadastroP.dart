@@ -1,3 +1,5 @@
+import 'package:projetodps/componentes/Button.dart';
+import 'package:projetodps/servicos/Httptype.dart';
 import 'package:flutter/material.dart';
 import 'package:projetodps/componentes/Inputtoform.dart';
 
@@ -7,7 +9,7 @@ class CadastroP extends StatefulWidget {
 }
 
 class _CadastroPState extends State<CadastroP> {
-  //chave de acesso para acessar o formulario de cadastro usar em validaçÕes fora do próprio form por exemplo
+  //chave de acesso para acessar o formulario de cadastro ,usual em validaçÕes fora do próprio form por exemplo
   GlobalKey<FormState> _chave =  GlobalKey();
   
   // controladores ao texto digitado pelo usuário no 'inputtoform'
@@ -15,10 +17,54 @@ class _CadastroPState extends State<CadastroP> {
   TextEditingController ccpf = TextEditingController(text: "insira o cpf aqui");
   TextEditingController csus = TextEditingController(text: "insira o número da carteira aqui");
   
+   //metódo chamado para chamar o post e mostrar na tela um AlertDialog dependendo da resposta
+   FutureBuilder _submeter() {
+            return FutureBuilder<Map>(
+              future: Httptype.postCP(cnome, ccpf, csus),
+              builder: (context,snapshot){
+                switch (snapshot.connectionState) {
+                  case ConnectionState.none:
+                    AlertDialog(
+                      title: Text("Cadastro"),
+                      content: Text("Houve um erro de conexão"),
+                      contentTextStyle: TextStyle(color:Colors.black),
+                      backgroundColor: Colors.greenAccent,
+                      actions: <Widget>[
+                        Button("ok", 3)
+                      ],
+
+                    );
+                    break;
+                  default:
+                    if(snapshot.hasError){
+                      AlertDialog(
+                        title: Text("Cadastro"),
+                        content: Text("Houve erro no cadastro"),
+                        contentTextStyle: TextStyle(color:Colors.black),
+                        backgroundColor: Colors.greenAccent,
+                        actions: <Widget>[
+                          Button("ok", 3)
+                        ],
+
+                    );
+                    }else{
+                      AlertDialog(
+                        title: Text("Cadastro"),
+                        content: Text("Cadastro Realizado com sucesso"),
+                        contentTextStyle: TextStyle(color:Colors.black),
+                        backgroundColor: Colors.greenAccent,
+                        actions: <Widget>[
+                          Button("ok", 3)
+                        ],
+                        );
+                    }
+                }
+              }  
+            ); 
+      }
    
-
-
-  void _resetarcampos() {
+   
+   void _resetarcampos() {
     cnome.text = "insira o nome aqui";
     ccpf.text = "insira o cpf aqui";
     csus.text = "insira o número da carteira aqui";
@@ -56,8 +102,8 @@ class _CadastroPState extends State<CadastroP> {
                 color: Colors.greenAccent,
                 onPressed:() {
                   if(_chave.currentState.validate()){
+                      _submeter();                     
                       _resetarcampos();
-                      debugPrint("deu certo");
                     }
                 },
                 child: Text("cadastrar",style: TextStyle(color:Colors.black,fontSize:20),),

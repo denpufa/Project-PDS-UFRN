@@ -42,9 +42,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: <Widget>[
                         Button('Cadastrar Paciente',1),
                         SizedBox(height:25),
-                        Button('Buscar Paciente',2),
+                        Button('deletar Paciente', 2),
+                        SizedBox(height: 25),
+                        Button('Buscar Paciente',3),
                         SizedBox(height:25),
-                        Button('Cadastrar Especialidade',3),
+                        Button('Cadastrar Especialidade',4),
+                        SizedBox(height:25),
+                      
                       ]
                     )
                   )

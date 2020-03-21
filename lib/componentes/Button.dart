@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:projetodps/telas/CadastroP.dart';
-class Button extends StatefulWidget {
+class Button extends StatelessWidget {
   final String _t;
   final int _i;
   
-  
-  @override
-  _Button createState() => _Button();
-  Button(this._t,this._i,{Key key}):super(key:key);
+
+  Button(this._t,this._i);
   
   String getT(){return _t;}
   int getI(){return _i;}
   
-
-}
- 
- class _Button extends State<Button>{
-  
   @override
   Widget build(BuildContext context) {
     return RaisedButton(
-          onPressed: (){_tipo(widget.getI());},
+          onPressed: (){_tipo(getI(),context);},
           textColor: Colors.black,
           padding: const EdgeInsets.all(0.0),
           child: Container(
@@ -30,7 +23,7 @@ class Button extends StatefulWidget {
             color: Colors.greenAccent,
             padding: const EdgeInsets.all(10.0),
             child: Text(
-            widget.getT(),
+            getT(),
               style: TextStyle(fontSize: 18)
             ),
           ),
@@ -38,13 +31,14 @@ class Button extends StatefulWidget {
       );
   }
   
-  void _tipo(int i)
+  void _tipo(int i,BuildContext c)
   {
+      
       switch(i)
       {
-        case 1:Navigator.push(context,MaterialPageRoute(builder:(context) =>  CadastroP()));  break;
+        case 1:Navigator.push(c,MaterialPageRoute(builder:(context) =>  CadastroP()));  break;
         case 2: break;
-        case 3: break;
+        case 3:Navigator.pop(c); break;
         break;
       }
     }
