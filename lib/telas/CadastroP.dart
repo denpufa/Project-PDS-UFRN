@@ -86,13 +86,13 @@ class _CadastroPState extends State<CadastroP> {
                 key: _chave,
                 child: Column(
                   children: <Widget>[
-                    Inputtoform("nome", TextInputType.text,cnome),
+                    Inputtoform("nome", TextInputType.text,cnome,'c'),
                     SizedBox(height: 12,),
-                    Inputtoform("cpf", TextInputType.number,ccpf),
+                    Inputtoform("cpf", TextInputType.number,ccpf,'c'),
                     SizedBox(height: 12),
-                    Inputtoform("carteira do sus",TextInputType.number,csus),
+                    Inputtoform("carteira do sus",TextInputType.number,csus,'c'),
                     SizedBox(height:12),
-                  ],
+                    ],
                 )
               ),
             SizedBox(height: 25,),

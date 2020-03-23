@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projetodps/telas/CadastroP.dart';
+import 'package:projetodps/telas/DeleteP.dart';
 class Button extends StatelessWidget {
   final String _t;
   final int _i;
@@ -37,7 +38,7 @@ class Button extends StatelessWidget {
       switch(i)
       {
         case 1:Navigator.push(c,MaterialPageRoute(builder:(context) =>  CadastroP()));  break;
-        case 2: break;
+        case 2:Navigator.push(c,MaterialPageRoute(builder: (context)=> DeleteP())); break;
         case 3:Navigator.pop(c); break;
         break;
       }

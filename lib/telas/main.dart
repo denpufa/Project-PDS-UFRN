@@ -30,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
             backgroundColor: Colors.white,
             appBar: AppBar(
-                 title: const Text('Sistema de marcações',style: TextStyle(color:Colors.black,fontSize: 25),),
+                 title: const Text('SISMAC',style: TextStyle(color:Colors.black,fontSize: 25),),
                  centerTitle: true,
                  backgroundColor: Colors.greenAccent,
             ),
@@ -44,11 +44,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         SizedBox(height:25),
                         Button('deletar Paciente', 2),
                         SizedBox(height: 25),
-                        Button('Buscar Paciente',3),
+                        Button('Alterar Paciente',4),
+                        SizedBox(height:25),
+                        Button('Buscar Paciente',5),
                         SizedBox(height:25),
                         Button('Cadastrar Especialidade',4),
                         SizedBox(height:25),
-                      
                       ]
                     )
                   )
