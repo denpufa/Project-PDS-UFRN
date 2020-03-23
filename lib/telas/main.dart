@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         SizedBox(height:25),
                         Button('Cadastrar Especialidade',4),
                         SizedBox(height:25),
-                      ]
+                      ],
                     )
                   )
                 ),
