@@ -1,77 +1,99 @@
 import 'package:flutter/material.dart';
 import 'package:projetodps/componentes/Botao.dart';
+import 'package:projetodps/repositorios/ApiRepositorio.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:projetodps/telas/AlteracaoP.dart';
 import 'package:projetodps/telas/CadastroP.dart';
-import 'package:projetodps/telas/DeleteP.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({
+class Home extends StatefulWidget {
+  Home({
     Key key,
   }) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HomeState createState() => _HomeState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomeState extends State<Home> {
+  var _carteiraControle = TextEditingController(text: "");
+  final _key = GlobalKey<FormState>();
+  bool _botaoPressionado = true;
+  int aux = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        title: Text(
-          'SISMAC',
-          style: TextStyle(color: Colors.black, fontSize: 25),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.greenAccent,
-      ),
+          automaticallyImplyLeading: false,
+          title: Text(
+            'SISMAC',
+            style: TextStyle(color: Colors.white, fontSize: 25),
+          ),
+          centerTitle: true,
+          backgroundColor: Theme.of(context).primaryColor),
       body: SingleChildScrollView(
         child: Center(
             child: Padding(
-                padding: EdgeInsets.fromLTRB(0.0, 120.0, 0.0, 0.0),
+                padding: EdgeInsets.fromLTRB(15.0, 170.0, 15.0, 0.0),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
+                      Container(
+                        padding:
+                            EdgeInsets.only(top: 50, right: 20.0, left: 20.0),
+                        decoration: ShapeDecoration(
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            )),
+                        child: Column(
+                          children: <Widget>[
+                            Icon(
+                              Icons.people,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            Text(
+                              "Olá! Procure voçê no sistema pelo nº da carteira",
+                              style: TextStyle(color: Colors.blueGrey),
+                            ),
+                            Form(
+                                key: _key,
+                                child: TextFormField(
+                                    keyboardType: TextInputType.number,
+                                    decoration: InputDecoration(
+                                      labelText: "carteira sus",
+                                      labelStyle: TextStyle(
+                                          color: Colors.blueGrey[300],
+                                          fontSize: 18),
+                                    ),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 15),
+                                    controller: _carteiraControle,
+                                    validator: (value) {
+                                      if (value.isEmpty) {
+                                        return "insira a carteira do sus por favor!";
+                                      } else if (value.length != 9) {
+                                        return "digite uma carteira do sus válida!";
+                                      }
+                                    }))
+                          ],
+                        ),
+                      ),
                       Botao(
-                          texto: "Cadastrar paciente",
+                          habilitar: _botaoPressionado,
+                          texto: "Buscar",
                           aoPressionar: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => CadastroP()));
-                          }),
-                      Botao(
-                          texto: "Deletar paciente",
-                          aoPressionar: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DeleteP()));
-                          }),
-                      Botao(
-                          texto: "Alterar paciente",
-                          aoPressionar: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AlteracaoP()));
-                          }),
-                      Botao(
-                          texto: "Buscar paciente",
-                          aoPressionar: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => BuscaP()));
-                          }),
-                      Botao(
-                          texto: "cadastrar especialidade",
-                          aoPressionar: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => CadastroE()));
+                            setState(() {
+                              _botaoPressionado = !_botaoPressionado;
+                              if (_key.currentState.validate()) {
+                                ApiRepositorio.buscarporsus(
+                                    _carteiraControle.text);
+                              }
+                              _carteiraControle.text = "";
+                            });
                           }),
                     ]))),
       ),
@@ -79,9 +101,10 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: null,
         child: Icon(
           Icons.help_outline,
-          color: Colors.black,
+          color: Theme.of(context).primaryColor,
         ),
-        backgroundColor: Colors.greenAccent,
+        backgroundColor: Colors.white,
+        elevation: 0,
       ),
     );
   }
