@@ -16,9 +16,9 @@ class _AlertaState extends State<Alerta> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(widget.titulo),
-      content: Text(widget.titulo),
+      content: Text(widget.recado),
       contentTextStyle: TextStyle(color: Colors.black),
-      backgroundColor: Colors.greenAccent,
+      backgroundColor: Colors.white,
       scrollable: true,
       actions: <Widget>[
         FlatButton(

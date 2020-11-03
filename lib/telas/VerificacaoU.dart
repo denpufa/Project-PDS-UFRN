@@ -8,6 +8,9 @@ class VerificacaoU extends StatefulWidget {
 }
 
 class _VerificacaoUState extends State<VerificacaoU> {
+  var _key = GlobalKey<FormState>();
+  var _codigo = TextEditingController(text: "");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,33 +33,43 @@ class _VerificacaoUState extends State<VerificacaoU> {
       ),
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: <
           Widget>[
-        Text("Confirme sua data de nascimento",
+        Text("Confirme uma código que foi enviado para seu e-mail",
             style:
-                TextStyle(color: Theme.of(context).primaryColor, fontSize: 19)),
+                TextStyle(color: Theme.of(context).primaryColor, fontSize: 16)),
+        Form(
+          key: _key,
+          child: Padding(
+              padding: EdgeInsets.fromLTRB(20.0, 0, 20.0, 15.0),
+              child: TextFormField(
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Theme.of(context).primaryColor, width: 0.6),
+                        borderRadius: BorderRadius.circular(15)),
+                    labelText: "código",
+                    hintText: "token de validação ",
+                    labelStyle:
+                        TextStyle(color: Colors.blueGrey[300], fontSize: 15),
+                  ),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.black, fontSize: 15),
+                  controller: _codigo,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return "insira o token   por favor!";
+                    }
+                  })),
+        ),
         Padding(
             padding: EdgeInsets.fromLTRB(80.0, 20.0, 80.0, 0),
             child: Botao(
                 habilitar: true,
                 texto: "Confirmar",
-                aoPressionar: () async {
-                  DateTime data = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime(1900),
-                    firstDate: DateTime(1900),
-                    lastDate: DateTime.now(),
-                  );
-
-                  if (data ==
-                      DateTime.utc(
-                          int.parse(ApiRepositorio.paciente['dataNascimento']
-                              .substring(6)),
-                          int.parse(ApiRepositorio.paciente['dataNascimento']
-                              .substring(3, 5)),
-                          int.parse(ApiRepositorio.paciente['dataNascimento']
-                              .substring(0, 2)))) {
-                    Navigator.pushNamed(context, '/usuario');
-                  } else {
-                    Navigator.pop(context);
+                aoPressionar: () {
+                  if (_key.currentState.validate()) {
+                    ApiRepositorio.validacao(
+                        _codigo.text, ApiRepositorio.usuario['id'], context);
                   }
                 }))
       ]),

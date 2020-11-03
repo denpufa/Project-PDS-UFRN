@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:projetodps/telas/Agendamentos.dart';
+import 'package:projetodps/telas/Alteracao.dart';
+import 'package:projetodps/telas/AlteracaoP.dart';
+import 'package:projetodps/telas/AlteracaoU.dart';
 import 'package:projetodps/telas/CadastroP.dart';
+import 'package:projetodps/telas/CadastroU.dart';
+import 'package:projetodps/telas/PesquisaSus.dart';
 import 'package:projetodps/telas/Usuario.dart';
 import 'package:projetodps/telas/VerificacaoU.dart';
 
@@ -25,7 +31,13 @@ class MyApp extends StatelessWidget {
         '/': (context) => Home(),
         '/cadastropaciente': (context) => CadastroP(),
         '/usuario': (context) => Usuario(),
-        '/verificacao': (context) => VerificacaoU()
+        '/verificacao': (context) => VerificacaoU(),
+        '/pesquisacpf': (context) => PesquisaSus(),
+        '/cadastrousuario': (context) => CadastroU(),
+        '/alteracao': (context) => Alteracao(),
+        '/alteracaopaciente': (context) => AlteracaoP(),
+        '/agendamentos': (context) => Agendamentos(),
+        '/alteracaousuario': (context) => AlteracaoU(),
       },
     );
   }

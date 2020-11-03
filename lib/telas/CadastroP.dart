@@ -16,8 +16,9 @@ class _CadastroPState extends State<CadastroP> {
   TextEditingController _ccidade = TextEditingController(text: "");
   TextEditingController _cbairro = TextEditingController(text: "");
   TextEditingController _ccomplemento = TextEditingController(text: "");
-  TextEditingController _cdatanasc = TextEditingController(text: "");
   TextEditingController _ctelefone = TextEditingController(text: "");
+  TextEditingController _cnumero = TextEditingController(text: "");
+  String _dataNas;
 
   void _resetarcampos() {
     _cnome.text = "";
@@ -26,8 +27,8 @@ class _CadastroPState extends State<CadastroP> {
     _ccidade.text = "";
     _cbairro.text = "";
     _ccomplemento.text = "";
-    _cdatanasc.text = "";
     _ctelefone.text = "";
+    _cnumero.text = "";
   }
 
   @override
@@ -176,6 +177,28 @@ class _CadastroPState extends State<CadastroP> {
                   Padding(
                       padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 12.0),
                       child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).primaryColor,
+                                    width: 0.6),
+                                borderRadius: BorderRadius.circular(15)),
+                            labelText: "nº",
+                            labelStyle: TextStyle(
+                                color: Colors.blueGrey[300], fontSize: 15),
+                          ),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.black, fontSize: 15),
+                          controller: _cnumero,
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return "insira o numero da sua residência por favor!";
+                            }
+                          })),
+                  Padding(
+                      padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 12.0),
+                      child: TextFormField(
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             focusedBorder: OutlineInputBorder(
@@ -225,13 +248,18 @@ class _CadastroPState extends State<CadastroP> {
                           corTexto: Theme.of(context).primaryColor,
                           texto: "data de nascimento",
                           aoPressionar: () async {
-                            //Navigator.pushNamed(context, '/usuario');
                             DateTime data = await showDatePicker(
                               context: context,
-                              initialDate: DateTime(1900),
+                              initialDate: DateTime(2000),
                               firstDate: DateTime(1900),
                               lastDate: DateTime.now(),
                             );
+
+                            _dataNas = '${data.day}' +
+                                '/' +
+                                '${data.month}' +
+                                '/' +
+                                '${data.year}';
                           })),
                 ])),
             Padding(
@@ -248,8 +276,10 @@ class _CadastroPState extends State<CadastroP> {
                         _ccidade.text,
                         _cbairro.text,
                         _ccomplemento.text,
-                        _cdatanasc.text,
-                        _ctelefone.text);
+                        _dataNas,
+                        _ctelefone.text,
+                        _cnumero.text,
+                        context);
                     _resetarcampos();
                   }
                 },

@@ -37,16 +37,18 @@ class _UsuarioState extends State<Usuario> {
                   Botao(
                       habilitar: true,
                       texto: "Agendamentos",
-                      aoPressionar: null),
+                      aoPressionar: () =>
+                          Navigator.pushNamed(context, '/agendamentos')),
                   SizedBox(
                     height: 10,
                   ),
                   Botao(
-                      cor: Colors.white,
-                      corTexto: Theme.of(context).primaryColor,
-                      habilitar: true,
-                      texto: "Alterações",
-                      aoPressionar: null),
+                    cor: Colors.white,
+                    corTexto: Theme.of(context).primaryColor,
+                    habilitar: true,
+                    texto: "Alterações",
+                    aoPressionar: () {},
+                  ),
                   SizedBox(
                     height: 10,
                   ),
@@ -62,7 +64,8 @@ class _UsuarioState extends State<Usuario> {
                         children: <Widget>[
                           ListTile(
                             leading: Icon(Icons.person),
-                            title: Text(ApiRepositorio.paciente["nome"]),
+                            title:
+                                Text(ApiRepositorio.paciente["nomePaciente"]),
                             subtitle: Text("nome"),
                           )
                         ],
@@ -120,10 +123,10 @@ class _UsuarioState extends State<Usuario> {
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           ListTile(
-                            leading: Icon(Icons.edit_location),
-                            title: Text(ApiRepositorio.paciente["bairro"]),
-                            subtitle: Text("bairro"),
-                          )
+                              leading: Icon(Icons.edit_location),
+                              title: Text(ApiRepositorio.paciente["bairro"]),
+                              subtitle: Text('bairro') //Text("bairro"),
+                              )
                         ],
                       ),
                     ),
@@ -135,11 +138,23 @@ class _UsuarioState extends State<Usuario> {
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             ListTile(
-                              leading: Icon(Icons.edit_location),
-                              title:
-                                  Text(ApiRepositorio.paciente["complemento"]),
-                              subtitle: Text("complemento"),
-                            )
+                                leading: Icon(Icons.location_on),
+                                title: Text(ApiRepositorio.paciente["numero"]),
+                                subtitle: Text('nº'))
+                          ],
+                        ),
+                      )),
+                  Padding(
+                      padding: EdgeInsets.only(bottom: 7),
+                      child: Card(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            ListTile(
+                                leading: Icon(Icons.edit_location),
+                                title: Text(
+                                    ApiRepositorio.paciente["complemento"]),
+                                subtitle: Text('complemento'))
                           ],
                         ),
                       )),
